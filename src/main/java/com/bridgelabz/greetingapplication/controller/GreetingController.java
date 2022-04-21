@@ -1,6 +1,7 @@
 package com.bridgelabz.greetingapplication.controller;//package name
 /**
  * UC1 :- Using GreetingController return JSON for different HTTP Methods. Test using curl
+ * UC2 :- Extend GreetingController to use Services Layer to get Simple Greeting message ”Hello World”
  *
  */
 
@@ -9,6 +10,10 @@ package com.bridgelabz.greetingapplication.controller;//package name
  * import classes
  */
 import com.bridgelabz.greetingapplication.model.Greeting;
+import com.bridgelabz.greetingapplication.service.GreetingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.concurrent.atomic.AtomicLong;
 /**
@@ -38,6 +43,10 @@ import java.util.concurrent.atomic.AtomicLong;
  *           @PathVariable is a Spring annotation which indicates that a method parameter should be bound to a URI template variable. It has the following optional elements: name - name of the path variable to bind to.
  *           required - tells whether the path variable is required.
  *
+ * 7) @Autowired :-
+ *            @Autowired annotation is used in setter methods to inject the value of the class properties. When the bean is loaded in the
+ *            ApplicationContext, the setter method is automatically called by the spring boot and the value is assigned.
+ *
  *
  */
 
@@ -48,6 +57,10 @@ import java.util.concurrent.atomic.AtomicLong;
 public class GreetingController {
     private static final String template = "Hello %s";
     private static AtomicLong counter = new AtomicLong();
+
+    //dependency injection
+    @Autowired
+    GreetingService greetingService;
 
     /**
      * path-/getGreeting
@@ -74,5 +87,14 @@ public class GreetingController {
     @PutMapping("/putMapping/{counter}")
     public Greeting sayHello(@PathVariable long counter, @RequestParam(value = "content") String content) {
         return new Greeting(counter, String.format(template, content));
+    }
+
+    /**
+     * path-/getMessage
+     * create a class name as ResponseEntity
+     */
+    @GetMapping("/getMessage")
+    public ResponseEntity<String> getMessage() {
+        return new ResponseEntity<String>(greetingService.getMessage(), HttpStatus.OK);
     }
 }
