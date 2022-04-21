@@ -19,4 +19,13 @@ public class GreetingService {
     public String getMessage() {
         return "Hello World";
     }
+    //create a method name as getGreetingMessage
+    public String getGreetingMessage(String firstName, String lastName) {
+        return "Hello " + firstName + "" + lastName;
+    }
+
+    //create a method name as postMessage
+    public String postMessage(String firstName, String lastName) {
+        return "Hello " + firstName + "" + lastName;
+    }
 }

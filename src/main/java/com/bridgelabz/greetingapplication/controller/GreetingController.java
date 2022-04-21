@@ -1,7 +1,11 @@
 package com.bridgelabz.greetingapplication.controller;//package name
 /**
  * UC1 :- Using GreetingController return JSON for different HTTP Methods. Test using curl
- * UC2 :- Extend GreetingController to use Services Layer to get Simple Greeting message ”Hello World”
+ * UC2 :- Extend GreetingController to use Services Layer to get Simple Greeting message ” Hello World”
+ * UC3 :- Ability for the Greeting App to give Greeting message with
+ *        1. User First Name and Last Name or
+ *        2. With just First Name or Last Name based on User attributes provides or
+ *        3. Just Hello World.
  *
  */
 
@@ -10,6 +14,7 @@ package com.bridgelabz.greetingapplication.controller;//package name
  * import classes
  */
 import com.bridgelabz.greetingapplication.model.Greeting;
+import com.bridgelabz.greetingapplication.model.User;
 import com.bridgelabz.greetingapplication.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -97,4 +102,23 @@ public class GreetingController {
     public ResponseEntity<String> getMessage() {
         return new ResponseEntity<String>(greetingService.getMessage(), HttpStatus.OK);
     }
+
+    /**
+     * path-/getGreetingMessage
+     * create a class name as ResponseEntity
+     */
+    @GetMapping("/getGreetingMessage")
+    public ResponseEntity<String> getGreetingMessage(@RequestParam(value = "firstName", defaultValue = "World") String firstName, @RequestParam(value = "lastName", defaultValue = "") String lastName) {
+        return new ResponseEntity<String>(greetingService.getGreetingMessage(firstName, lastName), HttpStatus.OK);
+    }
+
+    /**
+     * path-/post
+     * create a class name as ResponseEntity
+     */
+    @PostMapping("/post")
+    public ResponseEntity<String> getGreeting(@RequestBody User user) {
+        return new ResponseEntity<String>(greetingService.postMessage(user.getfirstName(), user.getlastName()), HttpStatus.OK);
+    }
 }
+
