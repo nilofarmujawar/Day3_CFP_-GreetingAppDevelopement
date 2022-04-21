@@ -40,4 +40,10 @@ public class GreetingService {
     public List<Greeting> getAllData() {
         return repository.findAll();
     }
+
+    public Greeting editData(Integer id, String content) {
+        Greeting newGreeting = new Greeting(id, String.format(template, content));
+        repository.save(newGreeting);
+        return newGreeting;
+    }
 }
