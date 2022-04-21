@@ -69,4 +69,9 @@ public class GreetingController {
     public ResponseEntity<Greeting> editGreeting(@RequestParam String content, @PathVariable Integer id) {
         return new ResponseEntity<Greeting>(greetingService.editData(id, content), HttpStatus.OK);
     }
+
+    @DeleteMapping("/deleteGreetingById/{id}")
+    public ResponseEntity<String> deleteGreetingById(@PathVariable Integer id) {
+        return new ResponseEntity<String>(greetingService.deleteDataById(id), HttpStatus.OK);
+    }
 }
