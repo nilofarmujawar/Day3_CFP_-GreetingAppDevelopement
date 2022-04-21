@@ -1,47 +1,48 @@
 package com.bridgelabz.greetingapplication.model;
 
-/**
- * creating a class name as User
- */
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class User {
-    /**
-     * variables
-     */
+
+
+    @Id
+    @GeneratedValue
+    private Integer id;
     private String firstName;
     private String lastName;
 
-    /**
-     * default constructor
-     */
+    public User(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public User() {
 
     }
 
-    /**
-     * create a parameterized constructor
-     *
-     */
     public User(User user) {
-        this.firstName=user.firstName;
-        this.lastName=user.lastName;
+        this.id = user.id;
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
     }
 
-    /**
-     * Used getter and setter to set and get the value.
-     * Setter is used to set the value
-     * Getter is used to get the value
-     */
 
     public String getfirstName() {
         return firstName;
     }
-    public void setfName(String fName) {
-        this.firstName = fName;
+
+    public void setfName(String firstName) {
+        this.firstName = firstName;
     }
+
     public String getlastName() {
         return lastName;
     }
-    public void setlastName(String lName) {
+
+    public void setlastName(String lastName) {
         this.lastName = lastName;
     }
 
