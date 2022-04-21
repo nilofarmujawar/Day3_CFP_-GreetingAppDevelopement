@@ -6,14 +6,17 @@ import javax.persistence.Id;
 
 @Entity
 public class Greeting {
+
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
     private String content;
 
+    public Greeting() {
+
+    }
+
     public Greeting(String content) {
-        super();
-        this.id = id;
         this.content = content;
     }
 
@@ -22,11 +25,17 @@ public class Greeting {
         this.content = greeting.content;
     }
 
-    public Long getId() {
+    public Greeting(Integer id, String content) {
+        super();
+        this.id = id;
+        this.content = content;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
